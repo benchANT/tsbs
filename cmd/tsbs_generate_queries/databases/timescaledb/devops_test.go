@@ -8,8 +8,8 @@ import (
 	"time"
 
 	"github.com/andreyvit/diff"
-	"github.com/timescale/tsbs/cmd/tsbs_generate_queries/uses/devops"
-	"github.com/timescale/tsbs/pkg/query"
+	"github.com/benchant/tsbs/cmd/tsbs_generate_queries/uses/devops"
+	"github.com/benchant/tsbs/pkg/query"
 )
 
 func TestDevopsGetHostWhereWithHostnames(t *testing.T) {

@@ -5,11 +5,11 @@ import (
 
 	"github.com/blagojts/viper"
 	"github.com/spf13/pflag"
-	"github.com/timescale/tsbs/internal/utils"
-	"github.com/timescale/tsbs/load"
-	"github.com/timescale/tsbs/pkg/data/source"
-	"github.com/timescale/tsbs/pkg/targets"
-	"github.com/timescale/tsbs/pkg/targets/prometheus"
+	"github.com/benchant/tsbs/internal/utils"
+	"github.com/benchant/tsbs/load"
+	"github.com/benchant/tsbs/pkg/data/source"
+	"github.com/benchant/tsbs/pkg/targets"
+	"github.com/benchant/tsbs/pkg/targets/prometheus"
 )
 
 // runs the benchmark

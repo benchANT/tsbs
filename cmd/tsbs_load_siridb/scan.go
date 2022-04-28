@@ -6,9 +6,9 @@ import (
 	"io"
 	"log"
 
-	"github.com/timescale/tsbs/pkg/data"
-	"github.com/timescale/tsbs/pkg/data/usecases/common"
-	"github.com/timescale/tsbs/pkg/targets"
+	"github.com/benchant/tsbs/pkg/data"
+	"github.com/benchant/tsbs/pkg/data/usecases/common"
+	"github.com/benchant/tsbs/pkg/targets"
 )
 
 type point struct {

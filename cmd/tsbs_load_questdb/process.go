@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net"
 
-	"github.com/timescale/tsbs/pkg/targets"
+	"github.com/benchant/tsbs/pkg/targets"
 )
 
 // allows for testing

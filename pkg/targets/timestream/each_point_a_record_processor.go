@@ -4,8 +4,8 @@ import (
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/timestreamwrite"
 	"github.com/pkg/errors"
-	"github.com/timescale/tsbs/pkg/data/usecases/common"
-	"github.com/timescale/tsbs/pkg/targets"
+	"github.com/benchant/tsbs/pkg/data/usecases/common"
+	"github.com/benchant/tsbs/pkg/targets"
 	"log"
 	"sync"
 )

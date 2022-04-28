@@ -8,13 +8,13 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/benchant/tsbs/internal/utils"
+	"github.com/benchant/tsbs/load"
+	"github.com/benchant/tsbs/pkg/targets"
+	"github.com/benchant/tsbs/pkg/targets/constants"
+	"github.com/benchant/tsbs/pkg/targets/initializers"
 	"github.com/blagojts/viper"
 	"github.com/spf13/pflag"
-	"github.com/timescale/tsbs/internal/utils"
-	"github.com/timescale/tsbs/load"
-	"github.com/timescale/tsbs/pkg/targets"
-	"github.com/timescale/tsbs/pkg/targets/constants"
-	"github.com/timescale/tsbs/pkg/targets/initializers"
 
 	"github.com/apache/iotdb-client-go/client"
 )
@@ -28,6 +28,11 @@ var (
 	csvFilepathPrefix    string // Prefix of filepath for csv files. Specific a folder or a folder with filename prefix.
 	useAlignedTimeseries bool   // using aligned timeseries if set true.
 	storeTags            bool   // store tags if set true. Can NOT be used if useAlignedTimeseries is set true.
+	channelCapacity      uint
+	noFlowControl        bool
+	hashWorkers          bool
+	batchSize            uint
+	tabletSize           int
 )
 
 // Global vars
@@ -68,7 +73,11 @@ func init() {
 	csvFilepathPrefix = viper.GetString("csv-prefix")
 	useAlignedTimeseries = viper.GetBool("aligned-timeseries")
 	storeTags = viper.GetBool("store-tags")
-
+	channelCapacity = viper.GetUint("channel-capacity")
+	noFlowControl = !viper.GetBool("flow-control")
+	hashWorkers = viper.GetBool("hash-workers")
+	batchSize = viper.GetUint("batch-size")
+	tabletSize = viper.GetInt("tablet-size")
 	workers := viper.GetUint("workers")
 
 	timeoutStr := fmt.Sprintf("timeout for session opening check: %d ms", timeoutInMs)
@@ -77,26 +86,19 @@ func init() {
 		timeoutStr = "no timeout for session opening check"
 	}
 	log.Printf("tsbs_load_iotdb target: %s:%s, %s. Loading with %d workers.\n", host, port, timeoutStr, workers)
-	if loadToSCV && workers != 1 {
-		err_msg := "Arguments conflicts! When using csv export method, `workers` should NOT be set more than 1. "
-		err_msg += fmt.Sprintf("Current setting: `to-csv`=%v, `workers`=%d.", loadToSCV, workers)
-		log.Println(err_msg)
-		panic(err_msg)
-	}
-	if useAlignedTimeseries && storeTags {
-		warn_msg := "[Waring] Can NOT store tags while using aligned timeseries!"
-		warn_msg += " Because IoTDB do NOT support 'attributes' and 'tags' for aligned timeseries yet."
-		log.Println(warn_msg)
-		warn_msg = "Automatic parameter correction: 'store-tags' is set to false."
-		log.Println(warn_msg)
-		storeTags = false
-	}
 
 	clientConfig = client.Config{
 		Host:     host,
 		Port:     port,
 		UserName: user,
 		Password: password,
+	}
+
+	loaderConfig.BatchSize = batchSize
+	loaderConfig.HashWorkers = hashWorkers
+	loaderConfig.NoFlowControl = noFlowControl
+	if channelCapacity > 0 {
+		loaderConfig.ChannelCapacity = channelCapacity
 	}
 
 	loader = load.GetBenchmarkRunner(loaderConfig)

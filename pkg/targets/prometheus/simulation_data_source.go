@@ -5,9 +5,9 @@ import (
 	"time"
 
 	"github.com/timescale/promscale/pkg/prompb"
-	"github.com/timescale/tsbs/pkg/data"
-	"github.com/timescale/tsbs/pkg/data/usecases/common"
-	"github.com/timescale/tsbs/pkg/targets"
+	"github.com/benchant/tsbs/pkg/data"
+	"github.com/benchant/tsbs/pkg/data/usecases/common"
+	"github.com/benchant/tsbs/pkg/targets"
 )
 
 func newSimulationDataSource(sim common.Simulator, useCurrentTime bool) targets.DataSource {

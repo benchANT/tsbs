@@ -62,9 +62,9 @@ Clone the TSBS repository, build test and install Go binaries:
 
 ```bash
 git clone git@github.com:questdb/tsbs.git
-cd ~/tmp/go/src/github.com/timescale/tsbs/ && git checkout questdb-tsbs-load-new
+cd ~/tmp/go/src/github.com/benchant/tsbs/ && git checkout questdb-tsbs-load-new
 GOPATH=~/tmp/go go build -v ./...
-GOPATH=~/tmp/go go test -v github.com/timescale/tsbs/cmd/tsbs_load_questdb
+GOPATH=~/tmp/go go test -v github.com/benchant/tsbs/cmd/tsbs_load_questdb
 GOPATH=~/tmp/go go install -v ./...
 ```
 

@@ -3,13 +3,13 @@ package timestream
 import (
 	"fmt"
 	"github.com/andreyvit/diff"
-	"github.com/timescale/tsbs/pkg/query"
+	"github.com/benchant/tsbs/pkg/query"
 	"math/rand"
 	"strings"
 	"testing"
 	"time"
 
-	"github.com/timescale/tsbs/cmd/tsbs_generate_queries/uses/devops"
+	"github.com/benchant/tsbs/cmd/tsbs_generate_queries/uses/devops"
 )
 
 // getMeasureNameWhereString

@@ -1,7 +1,7 @@
 package common
 
 import (
-	"github.com/timescale/tsbs/pkg/data"
+	"github.com/benchant/tsbs/pkg/data"
 	"hash"
 	"hash/fnv"
 )

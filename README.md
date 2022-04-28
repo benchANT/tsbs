@@ -435,7 +435,7 @@ the results.
 We welcome contributions from the community to make TSBS better!
 
 You can help either by opening an
-[issue](https://github.com/timescale/tsbs/issues) with
+[issue](https://github.com/benchant/tsbs/issues) with
 any suggestions or bug reports, or by forking this repository,
 making your own contribution, and submitting a pull request.
 

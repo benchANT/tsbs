@@ -3,7 +3,7 @@ package load
 import (
 	"reflect"
 
-	"github.com/timescale/tsbs/pkg/targets"
+	"github.com/benchant/tsbs/pkg/targets"
 )
 
 // ackAndMaybeSend adjust the unsent batches count
@@ -25,7 +25,8 @@ func ackAndMaybeSend(ch *duplexChannel, count *int, unsent []targets.Batch) []ta
 // sendOrQueueBatch attempts to send a Batch of data on a duplexChannel.
 // If it would block or there is other work to be sent first, the Batch is stored on a queue.
 // The count of outstanding work is adjusted upwards
-func sendOrQueueBatch(ch *duplexChannel, count *int, batch targets.Batch, unsent []targets.Batch) []targets.Batch {
+func sendOrQueueBatch(ch *duplexChannel, count *int,
+	batch targets.Batch, unsent []targets.Batch) []targets.Batch {
 	// In case there are no outstanding batches yet and there are empty positions in toWorker queue
 	// we can send/put batch into toWorker queue
 	*count++

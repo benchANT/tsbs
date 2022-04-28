@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/globalsign/mgo/bson"
-	"github.com/timescale/tsbs/cmd/tsbs_generate_queries/uses/devops"
-	"github.com/timescale/tsbs/internal/utils"
-	"github.com/timescale/tsbs/pkg/query"
+	"go.mongodb.org/mongo-driver/bson"
+	"github.com/benchant/tsbs/cmd/tsbs_generate_queries/uses/devops"
+	"github.com/benchant/tsbs/internal/utils"
+	"github.com/benchant/tsbs/pkg/query"
 )
 
 // TODO: Remove the need for this by continuing to bubble up errors
@@ -24,6 +24,7 @@ func init() {
 	gob.Register(map[string]interface{}{})
 	gob.Register([]map[string]interface{}{})
 	gob.Register(bson.M{})
+	gob.Register(bson.D{})
 	gob.Register([]bson.M{})
 }
 
@@ -48,14 +49,14 @@ func getTimeFilterPipeline(interval *utils.TimeInterval) []bson.M {
 							"$and": []interface{}{
 								bson.M{
 									"$gte": []interface{}{
-										"$$event.timestamp_ns",
-										interval.StartUnixNano(),
+                                        "$$event.time",
+                                        interval.Start(),
 									},
 								},
 								bson.M{
 									"$lt": []interface{}{
-										"$$event.timestamp_ns",
-										interval.EndUnixNano(),
+                                        "$$event.time",
+                                        interval.End(),
 									},
 								},
 							},
@@ -105,7 +106,6 @@ func (d *Devops) GroupByTime(qi query.Query, nHosts, numMetrics int, timeRange t
 	metrics, err := devops.GetCPUMetricsSlice(numMetrics)
 	panicIfErr(err)
 	docs := getTimeFilterDocs(interval)
-	bucketNano := time.Minute.Nanoseconds()
 
 	pipelineQuery := []bson.M{
 		{
@@ -132,10 +132,7 @@ func (d *Devops) GroupByTime(qi query.Query, nHosts, numMetrics int, timeRange t
 	pipelineQuery = append(pipelineQuery, bson.M{
 		"$project": bson.M{
 			"time_bucket": bson.M{
-				"$subtract": []interface{}{
-					"$events.timestamp_ns",
-					bson.M{"$mod": []interface{}{"$events.timestamp_ns", bucketNano}},
-				},
+				"$dateTrunc": bson.M{"date": "$events.time", "unit": "minute"},
 			},
 			"events": 1,
 		},
@@ -173,7 +170,6 @@ func (d *Devops) MaxAllCPU(qi query.Query, nHosts int, duration time.Duration) {
 	hostnames, err := d.GetRandomHosts(nHosts)
 	panicIfErr(err)
 	docs := getTimeFilterDocs(interval)
-	bucketNano := time.Hour.Nanoseconds()
 	metrics := devops.GetAllCPUMetrics()
 
 	pipelineQuery := []bson.M{
@@ -201,10 +197,7 @@ func (d *Devops) MaxAllCPU(qi query.Query, nHosts int, duration time.Duration) {
 	pipelineQuery = append(pipelineQuery, bson.M{
 		"$project": bson.M{
 			"time_bucket": bson.M{
-				"$subtract": []interface{}{
-					"$events.timestamp_ns",
-					bson.M{"$mod": []interface{}{"$events.timestamp_ns", bucketNano}},
-				},
+				"$dateTrunc": bson.M{"date": "$events.time", "unit": "hour"},
 			},
 			"events": 1,
 		},
@@ -242,7 +235,6 @@ func (d *Devops) GroupByTimeAndPrimaryTag(qi query.Query, numMetrics int) {
 	metrics, err := devops.GetCPUMetricsSlice(numMetrics)
 	panicIfErr(err)
 	docs := getTimeFilterDocs(interval)
-	bucketNano := time.Hour.Nanoseconds()
 
 	pipelineQuery := []bson.M{
 		{
@@ -269,10 +261,7 @@ func (d *Devops) GroupByTimeAndPrimaryTag(qi query.Query, numMetrics int) {
 		{
 			"$project": bson.M{
 				"time_bucket": bson.M{
-					"$subtract": []interface{}{
-						"$events.timestamp_ns",
-						bson.M{"$mod": []interface{}{"$events.timestamp_ns", bucketNano}},
-					},
+					"$dateTrunc": bson.M{"date": "$events.time", "unit": "hour"},
 				},
 				"measurement": 1,
 				"tags":        1,
@@ -297,10 +286,8 @@ func (d *Devops) GroupByTimeAndPrimaryTag(qi query.Query, numMetrics int) {
 	pipelineQuery = append(pipelineQuery, group)
 
 	// Add sort operators
-	pipelineQuery = append(pipelineQuery, []bson.M{
-		{"$sort": bson.M{"_id.hostname": 1}},
-		{"$sort": bson.M{"_id.time": 1}},
-	}...)
+    sort := bson.M{"$sort": bson.D{{ "_id.time",1}, {"_id.hostname", 1}}}
+    pipelineQuery = append(pipelineQuery, sort)
 
 	humanLabel := devops.GetDoubleGroupByLabel("Mongo", numMetrics)
 	q := qi.(*query.Mongo)
@@ -320,8 +307,6 @@ func (d *Devops) GroupByTimeAndPrimaryTag(qi query.Query, numMetrics int) {
 // AND (hostname = '$HOST' OR hostname = '$HOST2'...)
 func (d *Devops) HighCPUForHosts(qi query.Query, nHosts int) {
 	interval := d.Interval.MustRandWindow(devops.HighCPUDuration)
-	hostnames, err := d.GetRandomHosts(nHosts)
-	panicIfErr(err)
 	docs := getTimeFilterDocs(interval)
 
 	pipelineQuery := []bson.M{}
@@ -337,6 +322,8 @@ func (d *Devops) HighCPUForHosts(qi query.Query, nHosts int) {
 		},
 	}
 	if nHosts > 0 {
+        hostnames, err := d.GetRandomHosts(nHosts)
+        panicIfErr(err)
 		matchMap := match["$match"].(bson.M)
 		matchMap["tags.hostname"] = bson.M{"$in": hostnames}
 	}
@@ -396,7 +383,7 @@ func (d *Devops) LastPointPerHost(qi query.Query) {
 								"$and": []bson.M{
 									{"$in": []interface{}{"$tags.hostname", "$$hostnames"}},
 									{"$eq": []interface{}{"$key_id", "$$key_id"}},
-									{"$eq": []interface{}{"$measurement", "$$measurement"}},
+									{"$eq": []interface{}{"$measurement", "cpu"}},
 								},
 							},
 						},
@@ -419,7 +406,7 @@ func (d *Devops) LastPointPerHost(qi query.Query) {
 							"$and": []interface{}{
 								bson.M{
 									"$gte": []interface{}{
-										"$$event.timestamp_ns",
+										"$$event.time",
 										0,
 									},
 								},
@@ -458,7 +445,6 @@ func (d *Devops) GroupByOrderByLimit(qi query.Query) {
 		panic(err.Error())
 	}
 	docs := getTimeFilterDocs(interval)
-	bucketNano := time.Minute.Nanoseconds()
 
 	pipelineQuery := []bson.M{
 		{
@@ -483,10 +469,7 @@ func (d *Devops) GroupByOrderByLimit(qi query.Query) {
 		{
 			"$project": bson.M{
 				"time_bucket": bson.M{
-					"$subtract": []interface{}{
-						"$events.timestamp_ns",
-						bson.M{"$mod": []interface{}{"$events.timestamp_ns", bucketNano}},
-					},
+					"$dateTrunc": bson.M{"date": "$events.time", "unit": "minute"},
 				},
 				"field": "$events.usage_user",
 			},

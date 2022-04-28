@@ -5,8 +5,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/timescale/tsbs/cmd/tsbs_generate_queries/uses/devops"
-	"github.com/timescale/tsbs/pkg/query"
+	"github.com/benchant/tsbs/cmd/tsbs_generate_queries/uses/devops"
+	"github.com/benchant/tsbs/pkg/query"
 )
 
 // Devops produces PromQL queries for all the devops query types.

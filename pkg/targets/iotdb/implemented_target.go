@@ -1,18 +1,18 @@
 package iotdb
 
 import (
+	"github.com/benchant/tsbs/pkg/data/serialize"
+	"github.com/benchant/tsbs/pkg/data/source"
+	"github.com/benchant/tsbs/pkg/targets"
+	"github.com/benchant/tsbs/pkg/targets/constants"
 	"github.com/blagojts/viper"
 	"github.com/spf13/pflag"
-	"github.com/timescale/tsbs/pkg/data/serialize"
-	"github.com/timescale/tsbs/pkg/data/source"
-	"github.com/timescale/tsbs/pkg/targets"
-	"github.com/timescale/tsbs/pkg/targets/constants"
 )
 
 func NewTarget() targets.ImplementedTarget {
 	return &iotdbTarget{
-		BasicPath:      "root.sg",
-		BasicPathLevel: 1,
+		BasicPath:      "root",
+		BasicPathLevel: 0,
 	}
 }
 
@@ -31,7 +31,10 @@ func (t *iotdbTarget) TargetSpecificFlags(flagPrefix string, flagSet *pflag.Flag
 	flagSet.Bool(flagPrefix+"to-csv", false, "Do not insert into database, but to some CSV files.")
 	flagSet.String(flagPrefix+"csv-prefix", "./", "Prefix of filepath for CSV files. Specific a folder or a folder with filename prefix.")
 	flagSet.Bool(flagPrefix+"aligned-timeseries", true, "Using aligned timeseries for all metrics if set true.")
-	flagSet.Bool(flagPrefix+"store-tags", false, "Store tags if set true. Can NOT be used if aligned-timeseries is set true.")
+	flagSet.Bool(flagPrefix+"store-tags", true, "Store tags if set true. Can NOT be used if aligned-timeseries is set true.")
+	flagSet.Int(flagPrefix+"channel-capacity", 0, "Capacity of channel")
+	flagSet.Bool(flagPrefix+"flow-control", true, "Flow Control")
+	flagSet.Int(flagPrefix+"tablet-size", 10, "Tablet Size")
 }
 
 func (t *iotdbTarget) TargetName() string {

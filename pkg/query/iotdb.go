@@ -10,9 +10,12 @@ import (
 type IoTDB struct {
 	HumanLabel       []byte
 	HumanDescription []byte
+	id               uint64
 
-	SqlQuery []byte
-	id       uint64
+	AggregatePaths []string
+	StartTime      int64
+	EndTime        int64
+	SqlQuery       []byte
 }
 
 // IoTDBPool is a sync.Pool of IoTDB Query types
@@ -45,17 +48,17 @@ func (q *IoTDB) SetID(id uint64) {
 // String produces a debug-ready description of a Query.
 func (q *IoTDB) String() string {
 	return fmt.Sprintf(
-		"HumanLabel: %s, HumanDescription: %s, Query: %s",
-		q.HumanLabel, q.HumanDescription, q.SqlQuery,
+		"HumanLabel: %s, HumanDescription: %s, StartTime: %s, EndTime: %s, SqlQuery: %s",
+		q.HumanLabel, q.HumanDescription, q.StartTime, q.EndTime, q.SqlQuery,
 	)
 }
 
-// HumanLabelName returns the human readable name of this Query
+// HumanLabelName returns the human-readable name of this Query
 func (q *IoTDB) HumanLabelName() []byte {
 	return q.HumanLabel
 }
 
-// HumanDescriptionName returns the human readable description of this Query
+// HumanDescriptionName returns the human-readable description of this Query
 func (q *IoTDB) HumanDescriptionName() []byte {
 	return q.HumanDescription
 }
@@ -65,6 +68,10 @@ func (q *IoTDB) Release() {
 	q.HumanLabel = q.HumanLabel[:0]
 	q.HumanDescription = q.HumanDescription[:0]
 	q.id = 0
+
+	q.AggregatePaths = q.AggregatePaths[:0]
+	q.StartTime = 0
+	q.EndTime = 0
 	q.SqlQuery = q.SqlQuery[:0]
 
 	IoTDBPool.Put(q)

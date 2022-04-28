@@ -2,8 +2,8 @@ package devops
 
 import (
 	"fmt"
-	"github.com/timescale/tsbs/pkg/data"
-	"github.com/timescale/tsbs/pkg/data/usecases/common"
+	"github.com/benchant/tsbs/pkg/data"
+	"github.com/benchant/tsbs/pkg/data/usecases/common"
 	"math/rand"
 	"strconv"
 	"time"

@@ -5,9 +5,9 @@ import (
 	"testing"
 
 	"github.com/apache/iotdb-client-go/client"
+	"github.com/benchant/tsbs/pkg/data"
+	"github.com/benchant/tsbs/pkg/data/serialize"
 	"github.com/stretchr/testify/require"
-	"github.com/timescale/tsbs/pkg/data"
-	"github.com/timescale/tsbs/pkg/data/serialize"
 )
 
 func TestIotdbFormat(t *testing.T) {
@@ -79,22 +79,22 @@ func TestSerialize_normal(t *testing.T) {
 		{
 			description: "a regular point ",
 			inputPoint:  serialize.TestPointDefault(),
-			expected:    "deviceID,timestamp,usage_guest_nice\nroot.cpu.host_0,1451606400000000000,38.24311829\ndatatype,4\ntags,region='eu-west-1',datacenter='eu-west-1b'\n",
+			expected:    "0,cpu,host_0,tag,'hostname'='host_0','region'='eu-west-1','datacenter'='eu-west-1b'\n1,cpu,host_0,1451606400000,38.24311829\n",
 		},
 		{
 			description: "a regular Point using int as value",
 			inputPoint:  serialize.TestPointInt(),
-			expected:    "deviceID,timestamp,usage_guest\nroot.cpu.host_0,1451606400000000000,38\ndatatype,2\ntags,region='eu-west-1',datacenter='eu-west-1b'\n",
+			expected:    "1,cpu,host_0,1451606400000,38\n",
 		},
 		{
 			description: "a regular Point with multiple fields",
 			inputPoint:  serialize.TestPointMultiField(),
-			expected:    "deviceID,timestamp,big_usage_guest,usage_guest,usage_guest_nice\nroot.cpu.host_0,1451606400000000000,5000000000,38,38.24311829\ndatatype,2,2,4\ntags,region='eu-west-1',datacenter='eu-west-1b'\n",
+			expected:    "1,cpu,host_0,1451606400000,5000000000,38,38.24311829\n",
 		},
 		{
 			description: "a Point with no tags",
 			inputPoint:  serialize.TestPointNoTags(),
-			expected:    "deviceID,timestamp,usage_guest_nice\nroot.cpu.unknown,1451606400000000000,38.24311829\ndatatype,4\ntags\n",
+			expected:    "0,cpu,unknown,tag\n1,cpu,unknown,1451606400000,38.24311829\n",
 		},
 	}
 	for _, c := range cases {
@@ -127,28 +127,28 @@ func TestSerialize_nonDefaultBasicPath(t *testing.T) {
 			inputPoint:     serialize.TestPointDefault(),
 			BasicPath:      "root.sg",
 			BasicPathLevel: 1,
-			expected:       "deviceID,timestamp,usage_guest_nice\nroot.sg.cpu.host_0,1451606400000000000,38.24311829\ndatatype,4\ntags,region='eu-west-1',datacenter='eu-west-1b'\n",
+			expected:       "0,cpu,host_0,tag,'hostname'='host_0','region'='eu-west-1','datacenter'='eu-west-1b'\n1,cpu,host_0,1451606400000,38.24311829\n",
 		},
 		{
 			description:    "a regular Point using int as value",
 			inputPoint:     serialize.TestPointInt(),
 			BasicPath:      "root.ln",
 			BasicPathLevel: 1,
-			expected:       "deviceID,timestamp,usage_guest\nroot.ln.cpu.host_0,1451606400000000000,38\ndatatype,2\ntags,region='eu-west-1',datacenter='eu-west-1b'\n",
+			expected:       "1,cpu,host_0,1451606400000,38\n",
 		},
 		{
 			description:    "a regular Point with multiple fields",
 			inputPoint:     serialize.TestPointMultiField(),
 			BasicPath:      "root.db.abc",
 			BasicPathLevel: 2,
-			expected:       "deviceID,timestamp,big_usage_guest,usage_guest,usage_guest_nice\nroot.db.abc.cpu.host_0,1451606400000000000,5000000000,38,38.24311829\ndatatype,2,2,4\ntags,region='eu-west-1',datacenter='eu-west-1b'\n",
+			expected:       "1,cpu,host_0,1451606400000,5000000000,38,38.24311829\n",
 		},
 		{
 			description:    "a Point with no tags",
 			inputPoint:     serialize.TestPointNoTags(),
 			BasicPath:      "root",
 			BasicPathLevel: 0,
-			expected:       "deviceID,timestamp,usage_guest_nice\nroot.cpu.unknown,1451606400000000000,38.24311829\ndatatype,4\ntags\n",
+			expected:       "0,cpu,unknown,tag\n1,cpu,unknown,1451606400000,38.24311829\n",
 		},
 	}
 	for _, c := range cases {

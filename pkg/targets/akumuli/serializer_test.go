@@ -2,8 +2,8 @@ package akumuli
 
 import (
 	"bytes"
-	"github.com/timescale/tsbs/pkg/data"
-	"github.com/timescale/tsbs/pkg/data/serialize"
+	"github.com/benchant/tsbs/pkg/data"
+	"github.com/benchant/tsbs/pkg/data/serialize"
 	"strings"
 	"testing"
 )

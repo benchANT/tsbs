@@ -9,7 +9,7 @@ import (
 	"time"
 
 	"github.com/gocql/gocql"
-	"github.com/timescale/tsbs/internal/utils"
+	"github.com/benchant/tsbs/internal/utils"
 )
 
 // A QueryPlan is a strategy used to fulfill an HLQuery.
@@ -71,9 +71,7 @@ func (qp *QueryPlanWithServerAggregation) Execute(session *gocql.Session) ([]CQL
 			for iter.Scan(&x) {
 				agg.Put(x)
 			}
-			if err := iter.Close(); err != nil {
-				return nil, err
-			}
+			iter.Close()
 		}
 		results = append(results, CQLResult{TimeInterval: k, Values: []float64{agg.Get()}})
 	}

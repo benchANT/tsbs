@@ -5,9 +5,9 @@ import (
 	"net/url"
 	"time"
 
-	"github.com/timescale/tsbs/cmd/tsbs_generate_queries/uses/devops"
-	"github.com/timescale/tsbs/cmd/tsbs_generate_queries/utils"
-	"github.com/timescale/tsbs/pkg/query"
+	"github.com/benchant/tsbs/cmd/tsbs_generate_queries/uses/devops"
+	"github.com/benchant/tsbs/cmd/tsbs_generate_queries/utils"
+	"github.com/benchant/tsbs/pkg/query"
 )
 
 // BaseGenerator contains settings specific for QuestDB

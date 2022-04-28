@@ -2,10 +2,10 @@ package usecases
 
 import (
 	"fmt"
-	"github.com/timescale/tsbs/internal/utils"
-	"github.com/timescale/tsbs/pkg/data/usecases/common"
-	"github.com/timescale/tsbs/pkg/data/usecases/devops"
-	"github.com/timescale/tsbs/pkg/data/usecases/iot"
+	"github.com/benchant/tsbs/internal/utils"
+	"github.com/benchant/tsbs/pkg/data/usecases/common"
+	"github.com/benchant/tsbs/pkg/data/usecases/devops"
+	"github.com/benchant/tsbs/pkg/data/usecases/iot"
 	"math"
 )
 

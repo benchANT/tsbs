@@ -1,9 +1,9 @@
 package usecases
 
 import (
-	"github.com/timescale/tsbs/pkg/data/usecases/common"
-	"github.com/timescale/tsbs/pkg/data/usecases/devops"
-	"github.com/timescale/tsbs/pkg/data/usecases/iot"
+	"github.com/benchant/tsbs/pkg/data/usecases/common"
+	"github.com/benchant/tsbs/pkg/data/usecases/devops"
+	"github.com/benchant/tsbs/pkg/data/usecases/iot"
 	"reflect"
 	"testing"
 	"time"

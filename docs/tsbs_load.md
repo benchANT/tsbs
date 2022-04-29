@@ -43,7 +43,7 @@ The generated config file is saved in `./config.yaml`
 ### Sample config files
 
 You can find sample YAML configuration files for TimescaleDB in the 
-[sample-configs](https://github.com/timescale/tsbs/tree/master/docs/sample-configs) directory. Both single and multi-node examples are provided
+[sample-configs](https://github.com/benchant/tsbs/tree/master/docs/sample-configs) directory. Both single and multi-node examples are provided
 for `FILE` and `SIMULATOR` modes.
 
 ## On the fly simulation and load with `data-source: SIMULATOR`

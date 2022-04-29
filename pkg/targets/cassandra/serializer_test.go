@@ -1,7 +1,7 @@
 package cassandra
 
 import (
-	"github.com/timescale/tsbs/pkg/data/serialize"
+	"github.com/benchant/tsbs/pkg/data/serialize"
 	"testing"
 )
 

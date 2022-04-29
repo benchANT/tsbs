@@ -2,7 +2,7 @@ package prometheus
 
 import (
 	"github.com/timescale/promscale/pkg/prompb"
-	"github.com/timescale/tsbs/cmd/tsbs_load_prometheus/adapter/noop"
+	"github.com/benchant/tsbs/cmd/tsbs_load_prometheus/adapter/noop"
 	"net/http"
 	"net/http/httptest"
 	"net/url"

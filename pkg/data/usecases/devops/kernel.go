@@ -1,8 +1,8 @@
 package devops
 
 import (
-	"github.com/timescale/tsbs/pkg/data"
-	"github.com/timescale/tsbs/pkg/data/usecases/common"
+	"github.com/benchant/tsbs/pkg/data"
+	"github.com/benchant/tsbs/pkg/data/usecases/common"
 	"math/rand"
 	"time"
 )

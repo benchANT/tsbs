@@ -3,11 +3,11 @@ package victoriametrics
 import (
 	"github.com/blagojts/viper"
 	"github.com/spf13/pflag"
-	"github.com/timescale/tsbs/pkg/data/serialize"
-	"github.com/timescale/tsbs/pkg/data/source"
-	"github.com/timescale/tsbs/pkg/targets"
-	"github.com/timescale/tsbs/pkg/targets/constants"
-	"github.com/timescale/tsbs/pkg/targets/influx"
+	"github.com/benchant/tsbs/pkg/data/serialize"
+	"github.com/benchant/tsbs/pkg/data/source"
+	"github.com/benchant/tsbs/pkg/targets"
+	"github.com/benchant/tsbs/pkg/targets/constants"
+	"github.com/benchant/tsbs/pkg/targets/influx"
 )
 
 func NewTarget() targets.ImplementedTarget {

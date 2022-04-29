@@ -2,7 +2,7 @@ package devops
 
 import (
 	"fmt"
-	"github.com/timescale/tsbs/pkg/data"
+	"github.com/benchant/tsbs/pkg/data"
 	"math"
 	"testing"
 	"time"

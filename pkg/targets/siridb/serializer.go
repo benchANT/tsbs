@@ -3,7 +3,7 @@ package siridb
 import (
 	"encoding/binary"
 	"fmt"
-	"github.com/timescale/tsbs/pkg/data"
+	"github.com/benchant/tsbs/pkg/data"
 	"io"
 	"log"
 	"strconv"

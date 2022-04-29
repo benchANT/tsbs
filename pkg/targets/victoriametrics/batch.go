@@ -2,7 +2,7 @@ package victoriametrics
 
 import (
 	"bytes"
-	"github.com/timescale/tsbs/pkg/data"
+	"github.com/benchant/tsbs/pkg/data"
 	"log"
 )
 

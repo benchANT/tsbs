@@ -4,17 +4,17 @@ package main
 
 import (
 	"fmt"
-	"github.com/timescale/tsbs/pkg/query/config"
+	"github.com/benchant/tsbs/pkg/query/config"
 	"os"
 	"time"
 
 	"github.com/blagojts/viper"
 	"github.com/spf13/pflag"
-	"github.com/timescale/tsbs/cmd/tsbs_generate_queries/uses/devops"
-	"github.com/timescale/tsbs/cmd/tsbs_generate_queries/uses/iot"
-	"github.com/timescale/tsbs/cmd/tsbs_generate_queries/utils"
-	"github.com/timescale/tsbs/internal/inputs"
-	internalUtils "github.com/timescale/tsbs/internal/utils"
+	"github.com/benchant/tsbs/cmd/tsbs_generate_queries/uses/devops"
+	"github.com/benchant/tsbs/cmd/tsbs_generate_queries/uses/iot"
+	"github.com/benchant/tsbs/cmd/tsbs_generate_queries/utils"
+	"github.com/benchant/tsbs/internal/inputs"
+	internalUtils "github.com/benchant/tsbs/internal/utils"
 )
 
 var useCaseMatrix = map[string]map[string]utils.QueryFillerMaker{

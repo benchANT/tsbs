@@ -9,7 +9,7 @@
 #    * `in-table-partition-tag` = true
 #
 # See the documentation for each system for what configuration is available, 
-# typically found at: https://github.com/timescale/tsbs/tree/master/docs
+# typically found at: https://github.com/benchant/tsbs/tree/master/docs
 # 
 ################################################################################
 

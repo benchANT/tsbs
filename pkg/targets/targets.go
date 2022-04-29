@@ -3,10 +3,10 @@ package targets
 import (
 	"github.com/blagojts/viper"
 	"github.com/spf13/pflag"
-	"github.com/timescale/tsbs/pkg/data"
-	"github.com/timescale/tsbs/pkg/data/serialize"
-	"github.com/timescale/tsbs/pkg/data/source"
-	"github.com/timescale/tsbs/pkg/data/usecases/common"
+	"github.com/benchant/tsbs/pkg/data"
+	"github.com/benchant/tsbs/pkg/data/serialize"
+	"github.com/benchant/tsbs/pkg/data/source"
+	"github.com/benchant/tsbs/pkg/data/usecases/common"
 )
 
 type ImplementedTarget interface {

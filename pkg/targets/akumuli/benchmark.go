@@ -1,8 +1,8 @@
 package akumuli
 
 import (
-	"github.com/timescale/tsbs/load"
-	"github.com/timescale/tsbs/pkg/targets"
+	"github.com/benchant/tsbs/load"
+	"github.com/benchant/tsbs/pkg/targets"
 	"sync"
 )
 

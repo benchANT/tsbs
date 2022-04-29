@@ -4,7 +4,7 @@ import (
 	"hash/fnv"
 	"strings"
 
-	"github.com/timescale/tsbs/pkg/data"
+	"github.com/benchant/tsbs/pkg/data"
 )
 
 // hostnameIndexer is used to consistently send the same hostnames to the same queue

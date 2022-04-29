@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/timescale/tsbs/load"
-	"github.com/timescale/tsbs/pkg/data"
-	"github.com/timescale/tsbs/pkg/targets"
+	"github.com/benchant/tsbs/load"
+	"github.com/benchant/tsbs/pkg/data"
+	"github.com/benchant/tsbs/pkg/targets"
 )
 
 const dbType = "clickhouse"

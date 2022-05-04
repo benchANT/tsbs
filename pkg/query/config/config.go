@@ -27,7 +27,7 @@ type QueryGeneratorConfig struct {
 
 	ClickhouseUseTags bool `mapstructure:"clickhouse-use-tags"`
 
-	MongoUseNaive bool   `mapstructure:"mongo-use-native"`
+	MongoUseNaive bool   `mapstructure:"mongo-use-naive"`
 	DbName        string `mapstructure:"db-name"`
 }
 

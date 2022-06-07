@@ -35,6 +35,10 @@ var (
     retryableWrites      bool
     orderedInserts       bool
     randomFieldOrder     bool
+    collectionSharded    bool
+    numInitChunks        uint
+    shardKeySpec         string
+    balancerOn       bool
 )
 
 // Global vars
@@ -70,6 +74,10 @@ func init() {
     retryableWrites = viper.GetBool("retryable-writes")
     orderedInserts = viper.GetBool("ordered-inserts")
     randomFieldOrder = viper.GetBool("random-field-order")
+    collectionSharded = viper.GetBool("collection-sharded")
+    numInitChunks = viper.GetUint("number-initial-chunks")
+    shardKeySpec = viper.GetString("shard-key-spec")
+    balancerOn = viper.GetBool("balancer-on")
 	if documentPer {
 		config.HashWorkers = false
 	} else {

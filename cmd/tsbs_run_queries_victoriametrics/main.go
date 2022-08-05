@@ -6,15 +6,9 @@
 package main
 
 import (
-	"bytes"
-	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"log"
-	"net/http"
-	"os"
 	"strings"
-	"time"
 
 	"github.com/blagojts/viper"
 	"github.com/spf13/pflag"
@@ -79,7 +73,7 @@ func (p *processor) Init(workerNum int) {
 //		chunkSize:            chunkSize,
 //		database:             runner.DatabaseName(),
 	}
-	url := daemonUrls[workerNumber%len(daemonUrls)]
+	url := vmURLs[workerNum%len(vmURLs)]
 	p.w = NewHTTPClient(url)
 }
 

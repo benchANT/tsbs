@@ -1,12 +1,12 @@
 package main
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"net/http"
 	"os"
-	"strings"
 	"sync"
 	"time"
 
@@ -56,17 +56,8 @@ func NewHTTPClient(url string) *HTTPClient {
 	//	Host:       []byte(host),
 	//	HostString: host,
 	//	uri:        []byte{}, // heap optimization
-		Url:		url
+		Url:		url,
 	}
-}
-
-
-func (p *processor) do(q *query.HTTP) (float64, error) {
-
-
-
-
-
 }
 
 
@@ -92,13 +83,13 @@ func (w *HTTPClient) Do(q *query.HTTP, opts *HTTPClientDoOptions) (lag float64, 
 	/*if resp.StatusCode != http.StatusOK {
 		panic("http request did not return status 200 OK")
 	}*/
-	if resp.StatusCode != http.StatusOK {
-		return 0, fmt.Errorf("non-200 statuscode received: %d; Body: %s", resp.StatusCode, string(body))
-	}
 
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		return 0, fmt.Errorf("error while reading response body: %s", err)
+	}
+	if resp.StatusCode != http.StatusOK {
+		return 0, fmt.Errorf("non-200 statuscode received: %d; Body: %s", resp.StatusCode, string(body))
 	}
 	// if err != nil { panic(err) }
 	lag = float64(time.Since(start).Nanoseconds()) / 1e6 // milliseconds

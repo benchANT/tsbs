@@ -13,6 +13,7 @@ Current databases supported:
 + InfluxDB [(supplemental docs)](docs/influx.md)
 + MongoDB [(supplemental docs)](docs/mongo.md)
 + QuestDB [(supplemental docs)](docs/questdb.md)
++ RedisTimeSeries [(supplemental docs)](docs/redistimeseries.md)
 + SiriDB [(supplemental docs)](docs/siridb.md)
 + TimescaleDB [(supplemental docs)](docs/timescaledb.md)
 + Timestream [(supplemental docs)](docs/timestream.md)
@@ -77,6 +78,7 @@ cases are implemented for each database:
 |InfluxDB|X|X|
 |MongoDB|X|
 |QuestDB|X|X
+|RedisTimeSeries|X||
 |SiriDB|X|
 |TimescaleDB|X|X|
 |Timestream|X||

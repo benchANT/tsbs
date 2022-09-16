@@ -8,6 +8,7 @@ import (
 	"github.com/benchant/tsbs/cmd/tsbs_generate_queries/databases/influx"
 	"github.com/benchant/tsbs/cmd/tsbs_generate_queries/databases/mongo"
 	"github.com/benchant/tsbs/cmd/tsbs_generate_queries/databases/questdb"
+	"github.com/benchant/tsbs/cmd/tsbs_generate_queries/databases/redistimeseries"
 	"github.com/benchant/tsbs/cmd/tsbs_generate_queries/databases/siridb"
 	"github.com/benchant/tsbs/cmd/tsbs_generate_queries/databases/timescaledb"
 	"github.com/benchant/tsbs/cmd/tsbs_generate_queries/databases/timestream"
@@ -38,6 +39,7 @@ func InitQueryFactories(config *config.QueryGeneratorConfig) map[string]interfac
 	factories[constants.FormatTimestream] = &timestream.BaseGenerator{
 		DBName: config.DbName,
 	}
+	factories[constants.FormatRedisTimeSeries] = &redistimeseries.BaseGenerator{}
 	factories[constants.FormatQuestDB] = &questdb.BaseGenerator{}
 	return factories
 }

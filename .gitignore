@@ -7,3 +7,9 @@
 
 # High Dynamic Range (HDR) Histogram files
 *.hdr
+
+# Distribution related
+bin
+
+# JSON results
+*.json

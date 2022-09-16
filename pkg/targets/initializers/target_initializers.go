@@ -2,6 +2,8 @@ package initializers
 
 import (
 	"fmt"
+	"strings"
+
 	"github.com/benchant/tsbs/pkg/targets"
 	"github.com/benchant/tsbs/pkg/targets/akumuli"
 	"github.com/benchant/tsbs/pkg/targets/cassandra"
@@ -12,11 +14,11 @@ import (
 	"github.com/benchant/tsbs/pkg/targets/mongo"
 	"github.com/benchant/tsbs/pkg/targets/prometheus"
 	"github.com/benchant/tsbs/pkg/targets/questdb"
+	"github.com/timescale/tsbs/pkg/targets/redistimeseries"
 	"github.com/benchant/tsbs/pkg/targets/siridb"
 	"github.com/benchant/tsbs/pkg/targets/timescaledb"
 	"github.com/benchant/tsbs/pkg/targets/timestream"
 	"github.com/benchant/tsbs/pkg/targets/victoriametrics"
-	"strings"
 )
 
 func GetTarget(format string) targets.ImplementedTarget {
@@ -43,6 +45,8 @@ func GetTarget(format string) targets.ImplementedTarget {
 		return victoriametrics.NewTarget()
 	case constants.FormatTimestream:
 		return timestream.NewTarget()
+    case constants.FormatRedisTimeSeries:
+            return redistimeseries.NewTarget()
 	case constants.FormatQuestDB:
 		return questdb.NewTarget()
 	}

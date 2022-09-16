@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/timescale/tsbs/pkg/query"
+	"github.com/benchant/tsbs/pkg/query"
 	"strings"
 )
 

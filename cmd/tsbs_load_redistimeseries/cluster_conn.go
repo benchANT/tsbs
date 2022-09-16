@@ -7,7 +7,7 @@ import (
 	"sync"
 
 	"github.com/mediocregopher/radix/v3"
-	"github.com/timescale/tsbs/pkg/data"
+	"github.com/benchant/tsbs/pkg/data"
 )
 
 func getOSSClusterConn(addr string, opts []radix.DialOpt, clients uint64) *radix.Cluster {
@@ -103,30 +103,4 @@ func (i *RedisIndexer) GetIndex(p data.LoadedPoint) uint {
 	slotS := strings.Split(row, " ")[0]
 	clusterSlot, _ := strconv.ParseInt(slotS, 10, 0)
 	return uint(clusterSlot) % i.partitions
-}
-23
-cmd/tsbs_load_redistimeseries/creator.go
-@@ -0,0 +1,23 @@
-package main
-
-type dbCreator struct {
-}
-
-func (d *dbCreator) Init() {
-}
-
-func (d *dbCreator) DBExists(dbName string) bool {
-	return true
-}
-
-func (d *dbCreator) RemoveOldDB(dbName string) error {
-	return nil
-}
-
-func (d *dbCreator) CreateDB(dbName string) error {
-	return nil
-}
-
-func (d *dbCreator) Close() {
-
 }

@@ -5,7 +5,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/timescale/tsbs/pkg/targets"
+	"github.com/benchant/tsbs/pkg/targets"
 )
 
 type processor struct {

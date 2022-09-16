@@ -14,7 +14,7 @@ import (
 	"github.com/benchant/tsbs/pkg/targets/mongo"
 	"github.com/benchant/tsbs/pkg/targets/prometheus"
 	"github.com/benchant/tsbs/pkg/targets/questdb"
-	"github.com/timescale/tsbs/pkg/targets/redistimeseries"
+	"github.com/benchant/tsbs/pkg/targets/redistimeseries"
 	"github.com/benchant/tsbs/pkg/targets/siridb"
 	"github.com/benchant/tsbs/pkg/targets/timescaledb"
 	"github.com/benchant/tsbs/pkg/targets/timestream"

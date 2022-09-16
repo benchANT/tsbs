@@ -13,8 +13,8 @@ import (
 	"github.com/blagojts/viper"
 	_ "github.com/lib/pq"
 	"github.com/spf13/pflag"
-	"github.com/timescale/tsbs/internal/utils"
-	"github.com/timescale/tsbs/pkg/query"
+	"github.com/benchant/tsbs/internal/utils"
+	"github.com/benchant/tsbs/pkg/query"
 )
 
 // Program option vars:

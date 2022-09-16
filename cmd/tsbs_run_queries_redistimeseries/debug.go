@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/timescale/tsbs/pkg/query"
+	"github.com/benchant/tsbs/pkg/query"
 )
 
 func debug_print_redistimeseries_reply(reply [][]interface{}, idx int, tq *query.RedisTimeSeries) {

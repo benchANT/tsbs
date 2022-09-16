@@ -3,8 +3,8 @@ package redistimeseries
 import (
 	"fmt"
 	"github.com/mediocregopher/radix/v3"
-	"github.com/timescale/tsbs/pkg/data"
-	"github.com/timescale/tsbs/pkg/data/serialize"
+	"github.com/benchant/tsbs/pkg/data"
+	"github.com/benchant/tsbs/pkg/data/serialize"
 	"io"
 )
 

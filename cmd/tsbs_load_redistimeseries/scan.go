@@ -8,8 +8,8 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/timescale/tsbs/pkg/data"
-	"github.com/timescale/tsbs/pkg/targets"
+	"github.com/benchant/tsbs/pkg/data"
+	"github.com/benchant/tsbs/pkg/targets"
 )
 
 func buildCommand(line string, compression_type string) (clusterSlot int, cmdA radix.CmdAction, tscreate bool, metricCount int) {

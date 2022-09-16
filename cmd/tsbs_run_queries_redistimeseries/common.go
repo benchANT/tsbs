@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/mediocregopher/radix/v3"
-	"github.com/timescale/tsbs/pkg/query"
+	"github.com/benchant/tsbs/pkg/query"
 	"log"
 	"strings"
 )

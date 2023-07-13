@@ -7,7 +7,7 @@ import (
 	"strings"
 
 	"github.com/apache/iotdb-client-go/client"
-	"github.com/timescale/tsbs/pkg/data"
+	"github.com/benchant/tsbs/pkg/data"
 )
 
 // Serializer writes a Point in a serialized form for IoTDB
@@ -77,7 +77,7 @@ func modifyHostname(hostname string) string {
 	return hostname
 }
 
-// Utility function for appending various data types to a byte string
+// IotdbFormat Utility function for appending various data types to a byte string
 func IotdbFormat(v interface{}) ([]byte, client.TSDataType) {
 	switch v.(type) {
 	case uint:

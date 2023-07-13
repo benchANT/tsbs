@@ -6,8 +6,8 @@ import (
 	"testing"
 	"time"
 
+	"github.com/benchant/tsbs/cmd/tsbs_generate_queries/uses/devops"
 	"github.com/stretchr/testify/require"
-	"github.com/timescale/tsbs/cmd/tsbs_generate_queries/uses/devops"
 )
 
 func TestModifyHostnames(t *testing.T) {

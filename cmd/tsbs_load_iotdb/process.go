@@ -2,21 +2,13 @@ package main
 
 import (
 	"fmt"
+	"github.com/apache/iotdb-client-go/client"
 	"github.com/apache/iotdb-client-go/common"
-	"github.com/timescale/tsbs/pkg/targets/iotdb"
+	"github.com/benchant/tsbs/pkg/targets"
+	"github.com/benchant/tsbs/pkg/targets/iotdb"
+	"os"
 	"strconv"
 	"strings"
-	//"time"
-
-	//"github.com/timescale/tsbs/pkg/data"
-	"os"
-	//"strconv"
-	//"strings"
-	//"time"
-
-	"github.com/apache/iotdb-client-go/client"
-	"github.com/timescale/tsbs/pkg/targets"
-	//"github.com/timescale/tsbs/pkg/targets/iotdb"
 )
 
 type processor struct {

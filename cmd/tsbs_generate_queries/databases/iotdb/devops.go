@@ -5,8 +5,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/timescale/tsbs/cmd/tsbs_generate_queries/uses/devops"
-	"github.com/timescale/tsbs/pkg/query"
+	"github.com/benchant/tsbs/cmd/tsbs_generate_queries/uses/devops"
+	"github.com/benchant/tsbs/pkg/query"
 )
 
 // TODO: Remove the need for this by continuing to bubble up errors
@@ -102,13 +102,6 @@ func (d *Devops) getAggregatePaths(metrics, fromHosts []string) []string {
 
 // GroupByTime selects the MAX for numMetrics metrics under 'cpu',
 // per minute for nhosts hosts,
-// e.g. in pseudo-SQL:
-//
-// SELECT minute, max(metric1), ..., max(metricN)
-// FROM cpu
-// WHERE (hostname = '$HOSTNAME_1' OR ... OR hostname = '$HOSTNAME_N')
-// AND time >= '$HOUR_START' AND time < '$HOUR_END'
-// GROUP BY minute ORDER BY minute ASC
 func (d *Devops) GroupByTime(qi query.Query, nHosts, numMetrics int, timeRange time.Duration) {
 	interval := d.Interval.MustRandWindow(timeRange)
 	metrics, err := devops.GetCPUMetricsSlice(numMetrics)
@@ -122,13 +115,7 @@ func (d *Devops) GroupByTime(qi query.Query, nHosts, numMetrics int, timeRange t
 	d.fillInAggregation(qi, humanLabel, humanDesc, aggregatePaths, interval.Start().UnixMilli(), interval.End().UnixMilli())
 }
 
-// GroupByTimeAndPrimaryTag selects the AVG of numMetrics metrics under 'cpu' per device per hour for a day,
-// e.g. in pseudo-SQL:
-//
-// SELECT AVG(metric1), ..., AVG(metricN)
-// FROM cpu
-// WHERE time >= '$HOUR_START' AND time < '$HOUR_END'
-// GROUP BY hour, hostname ORDER BY hour
+// GroupByTimeAndPrimaryTag selects the AVG of numMetrics metrics under 'cpu' per device per hour for a day
 func (d *Devops) GroupByTimeAndPrimaryTag(qi query.Query, numMetrics int) {
 	metrics, err := devops.GetCPUMetricsSlice(numMetrics)
 	panicIfErr(err)
@@ -140,7 +127,8 @@ func (d *Devops) GroupByTimeAndPrimaryTag(qi query.Query, numMetrics int) {
 	sql := ""
 	sql = sql + fmt.Sprintf("SELECT %s", selectClause)
 	sql = sql + fmt.Sprintf(" FROM %s.cpu.*", d.BasicPath)
-	sql = sql + fmt.Sprintf(" GROUP BY ([%s, %s), 1h)", interval.Start().Format(iotdbTimeFmt), interval.End().Format(iotdbTimeFmt))
+	sql = sql + fmt.Sprintf(" GROUP BY ([%s, %s), 1h)", interval.Start().Format(iotdbTimeFmt),
+		interval.End().Format(iotdbTimeFmt))
 
 	d.fillInQuery(qi, humanLabel, humanDesc, sql)
 }
@@ -172,7 +160,8 @@ func (d *Devops) MaxAllCPU(qi query.Query, nHosts int, duration time.Duration) {
 	sql := ""
 	sql = sql + fmt.Sprintf("SELECT %s", selectClause)
 	sql = sql + fmt.Sprintf(" FROM %s", fromHosts)
-	sql = sql + fmt.Sprintf(" GROUP BY ([%s, %s), 1h), LEVEL=%d", interval.Start().Format(iotdbTimeFmt), interval.End().Format(iotdbTimeFmt), d.BasicPathLevel+1)
+	sql = sql + fmt.Sprintf(" GROUP BY ([%s, %s), 1h), LEVEL=%d",
+		interval.Start().Format(iotdbTimeFmt), interval.End().Format(iotdbTimeFmt), d.BasicPathLevel+1)
 
 	//FIXME error
 	d.fillInQuery(qi, humanLabel, humanDesc, sql)
@@ -196,7 +185,8 @@ func (d *Devops) GroupByOrderByLimit(qi query.Query) {
 	if optimizedStartTime.After(startTime) {
 		startTime = optimizedStartTime
 	}
-	sql = sql + fmt.Sprintf(" GROUP BY ([%s, %s), 1m), LEVEL = %d", startTime.Format(iotdbTimeFmt), endTime.Format(iotdbTimeFmt), d.BasicPathLevel+1)
+	sql = sql + fmt.Sprintf(" GROUP BY ([%s, %s), 1m), LEVEL = %d",
+		startTime.Format(iotdbTimeFmt), endTime.Format(iotdbTimeFmt), d.BasicPathLevel+1)
 	sql = sql + " ORDER BY TIME DESC LIMIT 5"
 
 	humanLabel := "IoTDB max cpu over last 5 min-intervals (random end)"
@@ -229,7 +219,8 @@ func (d *Devops) HighCPUForHosts(qi query.Query, nHosts int) {
 
 	sql := "SELECT *"
 	sql = sql + fmt.Sprintf(" FROM %s", fromHosts)
-	sql = sql + fmt.Sprintf(" WHERE usage_user > 90 AND time >= %s AND time < %s ALIGN BY DEVICE", interval.Start().Format(iotdbTimeFmt), interval.End().Format(iotdbTimeFmt))
+	sql = sql + fmt.Sprintf(" WHERE usage_user > 90 AND time >= %s AND time < %s ALIGN BY DEVICE",
+		interval.Start().Format(iotdbTimeFmt), interval.End().Format(iotdbTimeFmt))
 
 	d.fillInQuery(qi, humanLabel, humanDesc, sql)
 }

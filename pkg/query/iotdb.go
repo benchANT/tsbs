@@ -53,12 +53,12 @@ func (q *IoTDB) String() string {
 	)
 }
 
-// HumanLabelName returns the human readable name of this Query
+// HumanLabelName returns the human-readable name of this Query
 func (q *IoTDB) HumanLabelName() []byte {
 	return q.HumanLabel
 }
 
-// HumanDescriptionName returns the human readable description of this Query
+// HumanDescriptionName returns the human-readable description of this Query
 func (q *IoTDB) HumanDescriptionName() []byte {
 	return q.HumanDescription
 }

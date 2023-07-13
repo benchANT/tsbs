@@ -2,12 +2,10 @@ package main
 
 import (
 	"bufio"
-	"github.com/timescale/tsbs/pkg/data"
-	"github.com/timescale/tsbs/pkg/data/usecases/common"
-	"github.com/timescale/tsbs/pkg/targets"
-	"github.com/timescale/tsbs/pkg/targets/iotdb"
-
-	// "github.com/timescale/tsbs/pkg/targets/iotdb"
+	"github.com/benchant/tsbs/pkg/data"
+	"github.com/benchant/tsbs/pkg/data/usecases/common"
+	"github.com/benchant/tsbs/pkg/targets"
+	"github.com/benchant/tsbs/pkg/targets/iotdb"
 	"strings"
 )
 
@@ -19,7 +17,7 @@ type iotdbPoint struct {
 	fieldsCnt int
 }
 
-// A struct that storages data points
+// A struct that stores data points
 type iotdbBatch struct {
 	m          map[string][]string
 	rowCnt     uint   // count of records(rows)

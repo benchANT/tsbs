@@ -5,9 +5,9 @@ import (
 	"testing"
 
 	"github.com/apache/iotdb-client-go/client"
+	"github.com/benchant/tsbs/pkg/data"
+	"github.com/benchant/tsbs/pkg/data/serialize"
 	"github.com/stretchr/testify/require"
-	"github.com/timescale/tsbs/pkg/data"
-	"github.com/timescale/tsbs/pkg/data/serialize"
 )
 
 func TestIotdbFormat(t *testing.T) {

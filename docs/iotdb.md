@@ -29,7 +29,7 @@ is `root.cpu.host_0`.
 specifies a unique device, so it's selected to be part of `deviceID`. But other
 tags are not so important and their values do not change during whole testing,
 so they are designed to be stored in a node named `_tags` as attributes.
-For more detail about how IoTDB manage attributes of a node, please take a look
+For more details about how IoTDB manage attributes of a node, please take a look
 at [Timeseries Management](https://iotdb.apache.org/UserGuide/Master/Operate-Metadata/Timeseries.html#create-timeseries).
 
 The unit of timestamp in generated data is nanosecond, but it will be converted
@@ -88,14 +88,12 @@ InsertAlignedRecords, which is faster than InsertRecords.
 
 #### `-store-tags` (type: `bool`, default: `true`)
 
-Store tags if set true. Can NOT be used if `-aligned-timeseries` is set true.
-That's because IoTDB do NOT support 'attributes' and 'tags' for aligned
-timeseries yet.
+Store tags if set true.
 
 #### `-tablet-size` (type: `int`, default: `10`)
 
-When tablet-size if set more than `0`, using `insertTablets` interface to load data to IoTDB,
-when tablet-size if set less or equals than `0`, using `insertRecords` interface to load data to IoTDB.
+When tablet-size is set more than `0`, using `insertTablets` interface to load data to IoTDB; 
+when tablet-size is set less or equals than `0`, using `insertRecords` interface to load data to IoTDB.
 
 ---
 

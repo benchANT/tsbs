@@ -3,9 +3,9 @@ package iotdb
 import (
 	"time"
 
-	"github.com/timescale/tsbs/cmd/tsbs_generate_queries/uses/devops"
-	"github.com/timescale/tsbs/cmd/tsbs_generate_queries/utils"
-	"github.com/timescale/tsbs/pkg/query"
+	"github.com/benchant/tsbs/cmd/tsbs_generate_queries/uses/devops"
+	"github.com/benchant/tsbs/cmd/tsbs_generate_queries/utils"
+	"github.com/benchant/tsbs/pkg/query"
 )
 
 const iotdbTimeFmt = "2006-01-02 15:04:05"
@@ -29,8 +29,9 @@ func (g *BaseGenerator) fillInQuery(qi query.Query, humanLabel, humanDesc, sql s
 	q.SqlQuery = []byte(sql)
 }
 
-// fillInQuery fills the query struct with data.
-func (g *BaseGenerator) fillInAggregation(qi query.Query, humanLabel, humanDesc string, aggregationPaths []string, startTime, endTime int64) {
+// fillInAggregation fills the aggregation query struct with data.
+func (g *BaseGenerator) fillInAggregation(qi query.Query, humanLabel, humanDesc string,
+	aggregationPaths []string, startTime, endTime int64) {
 	q := qi.(*query.IoTDB)
 	q.HumanLabel = []byte(humanLabel)
 	q.HumanDescription = []byte(humanDesc)
@@ -48,10 +49,10 @@ func (g *BaseGenerator) NewDevops(start, end time.Time, scale int) (utils.QueryG
 		return nil, err
 	}
 
-	devops := &Devops{
+	d := &Devops{
 		BaseGenerator: g,
 		Core:          core,
 	}
 
-	return devops, nil
+	return d, nil
 }

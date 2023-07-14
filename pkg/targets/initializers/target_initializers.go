@@ -9,6 +9,7 @@ import (
 	"github.com/benchant/tsbs/pkg/targets/constants"
 	"github.com/benchant/tsbs/pkg/targets/crate"
 	"github.com/benchant/tsbs/pkg/targets/influx"
+	"github.com/benchant/tsbs/pkg/targets/iotdb"
 	"github.com/benchant/tsbs/pkg/targets/mongo"
 	"github.com/benchant/tsbs/pkg/targets/prometheus"
 	"github.com/benchant/tsbs/pkg/targets/questdb"

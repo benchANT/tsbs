@@ -90,7 +90,7 @@ InsertAlignedRecords, which is faster than InsertRecords.
 
 Store tags if set true.
 
-#### `-tablet-size` (type: `int`, default: `10`)
+#### `-tablet-size` (type: `int`, default: `20`)
 
 When tablet-size is set more than `0`, using `insertTablets` interface to load data to IoTDB; 
 when tablet-size is set less or equals than `0`, using `insertRecords` interface to load data to IoTDB.

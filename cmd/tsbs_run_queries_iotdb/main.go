@@ -96,6 +96,10 @@ func (p *processor) Init(workerNumber int) {
 		errMsg = errMsg + fmt.Sprintf("timeout setting: %d ms", timeoutInMs)
 		log.Fatal(errMsg)
 	}
+	_, err := p.session.ExecuteStatement("flush")
+	if err != nil {
+		log.Fatal(fmt.Sprintf("flush meets error: %v\n", err))
+	}
 }
 
 func (p *processor) ProcessQuery(q query.Query, _ bool) ([]*query.Stat, error) {

@@ -226,6 +226,9 @@ func (p *processor) ProcessBatch(b targets.Batch, doLoad bool) (metricCount, row
 // parse datatype and convert string into interface
 func parseDataToInterface(datatype client.TSDataType, str string) (interface{}, error) {
 	switch datatype {
+	case client.INT32:
+		value, err := strconv.ParseInt(str, 10, 32)
+		return interface{}(int32(value)), err
 	case client.INT64:
 		value, err := strconv.ParseInt(str, 10, 64)
 		return interface{}(value), err

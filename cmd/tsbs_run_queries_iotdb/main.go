@@ -121,7 +121,7 @@ func (p *processor) ProcessQuery(q query.Query, _ bool) ([]*query.Stat, error) {
 			device := strings.Join(splits[:len(splits)-1], ".")
 			measurement := splits[len(splits)-1]
 			dataSet, err = p.session.ExecuteGroupByQueryIntervalQuery(&db, device, measurement,
-				common.TAggregationType_MAX_VALUE, 2,
+				common.TAggregationType_MAX_VALUE, 1,
 				&startTimeInMills, &endTimeInMills, &interval, &timeoutInMs)
 
 			if err != nil {

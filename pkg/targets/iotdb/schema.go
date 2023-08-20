@@ -35,7 +35,7 @@ var (
 	diskFields = []string{
 		"total",
 		"free",
-		"used",
+		"usage",
 		"used_percent",
 		"inodes_total",
 		"inodes_free",
@@ -54,7 +54,7 @@ var (
 	memFields = []string{
 		"total",
 		"available",
-		"used",
+		"usage",
 		"free",
 		"cached",
 		"buffered",
@@ -141,13 +141,13 @@ var (
 func init() {
 	for _, f := range cpuFields {
 		GlobalMeasurementMap["cpu"] = append(GlobalMeasurementMap["cpu"], f)
-		GlobalDataTypeMap["cpu"] = append(GlobalDataTypeMap["cpu"], client.INT64)
-		GlobalTabletSchemaMap["cpu"] = append(GlobalTabletSchemaMap["cpu"], &client.MeasurementSchema{Measurement: f, DataType: client.INT64})
+		GlobalDataTypeMap["cpu"] = append(GlobalDataTypeMap["cpu"], client.INT32)
+		GlobalTabletSchemaMap["cpu"] = append(GlobalTabletSchemaMap["cpu"], &client.MeasurementSchema{Measurement: f, DataType: client.INT32})
 	}
 	for _, f := range diskioFields {
 		GlobalMeasurementMap["diskio"] = append(GlobalMeasurementMap["diskio"], f)
-		GlobalDataTypeMap["diskio"] = append(GlobalDataTypeMap["diskio"], client.INT64)
-		GlobalTabletSchemaMap["diskio"] = append(GlobalTabletSchemaMap["diskio"], &client.MeasurementSchema{Measurement: f, DataType: client.INT64})
+		GlobalDataTypeMap["diskio"] = append(GlobalDataTypeMap["diskio"], client.INT32)
+		GlobalTabletSchemaMap["diskio"] = append(GlobalTabletSchemaMap["diskio"], &client.MeasurementSchema{Measurement: f, DataType: client.INT32})
 	}
 	for _, f := range diskFields {
 		GlobalMeasurementMap["disk"] = append(GlobalMeasurementMap["disk"], f)
@@ -156,8 +156,8 @@ func init() {
 	}
 	for _, f := range kernelFields {
 		GlobalMeasurementMap["kernel"] = append(GlobalMeasurementMap["kernel"], f)
-		GlobalDataTypeMap["kernel"] = append(GlobalDataTypeMap["kernel"], client.INT64)
-		GlobalTabletSchemaMap["kernel"] = append(GlobalTabletSchemaMap["kernel"], &client.MeasurementSchema{Measurement: f, DataType: client.INT64})
+		GlobalDataTypeMap["kernel"] = append(GlobalDataTypeMap["kernel"], client.INT32)
+		GlobalTabletSchemaMap["kernel"] = append(GlobalTabletSchemaMap["kernel"], &client.MeasurementSchema{Measurement: f, DataType: client.INT32})
 	}
 	for _, f := range memFields {
 		GlobalMeasurementMap["mem"] = append(GlobalMeasurementMap["mem"], f)
@@ -172,18 +172,18 @@ func init() {
 	}
 	for _, f := range netFields {
 		GlobalMeasurementMap["net"] = append(GlobalMeasurementMap["net"], f)
-		GlobalDataTypeMap["net"] = append(GlobalDataTypeMap["net"], client.INT64)
-		GlobalTabletSchemaMap["net"] = append(GlobalTabletSchemaMap["net"], &client.MeasurementSchema{Measurement: f, DataType: client.INT64})
+		GlobalDataTypeMap["net"] = append(GlobalDataTypeMap["net"], client.INT32)
+		GlobalTabletSchemaMap["net"] = append(GlobalTabletSchemaMap["net"], &client.MeasurementSchema{Measurement: f, DataType: client.INT32})
 	}
 	for _, f := range nginxFields {
 		GlobalMeasurementMap["nginx"] = append(GlobalMeasurementMap["nginx"], f)
-		GlobalDataTypeMap["nginx"] = append(GlobalDataTypeMap["nginx"], client.INT64)
-		GlobalTabletSchemaMap["nginx"] = append(GlobalTabletSchemaMap["nginx"], &client.MeasurementSchema{Measurement: f, DataType: client.INT64})
+		GlobalDataTypeMap["nginx"] = append(GlobalDataTypeMap["nginx"], client.INT32)
+		GlobalTabletSchemaMap["nginx"] = append(GlobalTabletSchemaMap["nginx"], &client.MeasurementSchema{Measurement: f, DataType: client.INT32})
 	}
 	for _, f := range postgreslFields {
 		GlobalMeasurementMap["postgresl"] = append(GlobalMeasurementMap["postgresl"], f)
-		GlobalDataTypeMap["postgresl"] = append(GlobalDataTypeMap["postgresl"], client.INT64)
-		GlobalTabletSchemaMap["postgresl"] = append(GlobalTabletSchemaMap["postgresl"], &client.MeasurementSchema{Measurement: f, DataType: client.INT64})
+		GlobalDataTypeMap["postgresl"] = append(GlobalDataTypeMap["postgresl"], client.INT32)
+		GlobalTabletSchemaMap["postgresl"] = append(GlobalTabletSchemaMap["postgresl"], &client.MeasurementSchema{Measurement: f, DataType: client.INT32})
 	}
 	for _, f := range redisFields {
 		GlobalMeasurementMap["redis"] = append(GlobalMeasurementMap["redis"], f)

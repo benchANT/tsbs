@@ -65,8 +65,8 @@ func init() {
 
 	host := viper.GetString("host")
 	port := viper.GetString("port")
-	user := viper.GetString("user")
-	password := viper.GetString("password")
+	user := "root"
+	password := "root"
 	timeoutInMs = viper.GetInt("timeout")
 	recordsMaxRows = viper.GetInt("records-max-rows")
 	loadToSCV = viper.GetBool("to-csv")

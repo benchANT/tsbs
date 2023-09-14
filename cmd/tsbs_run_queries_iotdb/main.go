@@ -54,8 +54,8 @@ func init() {
 
 	host := viper.GetString("host")
 	port := viper.GetString("port")
-	user := viper.GetString("user")
-	password := viper.GetString("password")
+	user := "root"
+	password := "root"
 	workers := viper.GetUint("workers")
 	usingGroupByApi = viper.GetBool("use-groupby")
 	singleDatabase = viper.GetBool("single-database")

@@ -15,6 +15,7 @@ const (
 	FormatTimestream      = "timestream"
 	FormatQuestDB         = "questdb"
 	FormatIoTDB           = "iotdb"
+	FormatInflux2         = "influx2"
 	FormatGreptime        = "greptime"
 )
 
@@ -33,6 +34,7 @@ func SupportedFormats() []string {
 		FormatTimestream,
 		FormatQuestDB,
 		FormatIoTDB,
+		FormatInflux2,
 		FormatGreptime,
 	}
 }

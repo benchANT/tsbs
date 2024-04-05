@@ -27,7 +27,8 @@ loaders: tsbs_load \
  		 tsbs_load_timescaledb \
  		 tsbs_load_victoriametrics \
  		 tsbs_load_questdb \
-		 tsbs_load_iotdb
+		 tsbs_load_iotdb \
+		 tsbs_load_greptime
 
 runners: tsbs_run_queries_akumuli \
 		 tsbs_run_queries_cassandra \
@@ -43,7 +44,14 @@ runners: tsbs_run_queries_akumuli \
 		 tsbs_run_queries_iotdb
 
 test:
-	$(GOTEST) -v ./...
+	$(GOTEST) -v -race \
+          ./cmd/tsbs_generate_data \
+          ./cmd/tsbs_generate_queries \
+          ./cmd/tsbs_load \
+          ./cmd/tsbs_load_greptime \
+          ./internal/... \
+          ./load/... \
+          ./pkg/...
 
 coverage:
 	$(GOTEST) -race -coverprofile=coverage.txt -covermode=atomic ./...

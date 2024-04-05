@@ -5,6 +5,7 @@ import (
 	"github.com/benchant/tsbs/cmd/tsbs_generate_queries/databases/cassandra"
 	"github.com/benchant/tsbs/cmd/tsbs_generate_queries/databases/clickhouse"
 	"github.com/benchant/tsbs/cmd/tsbs_generate_queries/databases/cratedb"
+	"github.com/benchant/tsbs/cmd/tsbs_generate_queries/databases/greptime"
 	"github.com/benchant/tsbs/cmd/tsbs_generate_queries/databases/influx"
 	"github.com/benchant/tsbs/cmd/tsbs_generate_queries/databases/iotdb"
 	"github.com/benchant/tsbs/cmd/tsbs_generate_queries/databases/mongo"
@@ -40,6 +41,7 @@ func InitQueryFactories(config *config.QueryGeneratorConfig) map[string]interfac
 		DBName: config.DbName,
 	}
 	factories[constants.FormatQuestDB] = &questdb.BaseGenerator{}
+	factories[constants.FormatGreptime] = &greptime.BaseGenerator{}
 	factories[constants.FormatIoTDB] = &iotdb.BaseGenerator{
 		BasicPath:      "root",
 		BasicPathLevel: 0,

@@ -5,9 +5,9 @@ import (
 	"bytes"
 	"strings"
 
-	"github.com/timescale/tsbs/pkg/data"
-	"github.com/timescale/tsbs/pkg/data/usecases/common"
-	"github.com/timescale/tsbs/pkg/targets"
+	"github.com/benchant/tsbs/pkg/data"
+	"github.com/benchant/tsbs/pkg/data/usecases/common"
+	"github.com/benchant/tsbs/pkg/targets"
 )
 
 const errNotThreeTuplesFmt = "parse error: line does not have 3 tuples, has %d"

@@ -7,6 +7,7 @@ import (
 	"github.com/benchant/tsbs/cmd/tsbs_generate_queries/databases/cratedb"
 	"github.com/benchant/tsbs/cmd/tsbs_generate_queries/databases/influx"
 	"github.com/benchant/tsbs/cmd/tsbs_generate_queries/databases/iotdb"
+	"github.com/benchant/tsbs/cmd/tsbs_generate_queries/databases/kaiwudb"
 	"github.com/benchant/tsbs/cmd/tsbs_generate_queries/databases/mongo"
 	"github.com/benchant/tsbs/cmd/tsbs_generate_queries/databases/questdb"
 	"github.com/benchant/tsbs/cmd/tsbs_generate_queries/databases/siridb"
@@ -44,5 +45,11 @@ func InitQueryFactories(config *config.QueryGeneratorConfig) map[string]interfac
 		BasicPath:      "root",
 		BasicPathLevel: 0,
 	}
+	factories[constants.FormatKaiwuDB] = &kaiwudb.BaseGenerator{
+		CPUDBName:         config.DbName,
+		ReadingDBName:     config.DbName,
+		DiagnosticsDBName: config.DbName,
+	}
+
 	return factories
 }

@@ -168,7 +168,12 @@ func (p *processor) ProcessBatch(b targets.Batch, doLoad bool) (metricCount, row
 						kvString = kvString + "," + kv
 					}
 				}
-				sql := fmt.Sprintf("CREATE ALIGNED TIMESERIES %s(_tags INT32 tags(%s)) ", fullDevice, kvString)
+				var sql string
+				if useAlignedTimeseries {
+					sql = fmt.Sprintf("CREATE ALIGNED TIMESERIES %s(_tags INT32 tags(%s)) ", fullDevice, kvString)
+				} else {
+					sql = fmt.Sprintf("CREATE TIMESERIES %s(_tags INT32 tags(%s)) ", fullDevice, kvString)
+				}
 				_, err := p.session.ExecuteStatement(sql)
 				if err != nil {
 					fatal("ExecuteStatement CREATE timeseries with tags error: %v", err)

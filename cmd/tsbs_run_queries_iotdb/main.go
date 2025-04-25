@@ -131,8 +131,8 @@ func (p *processor) Init(workerNumber int) {
 			if err != nil {
 				log.Fatal(fmt.Sprintf("flush meets error: %v\n", err))
 			}
-			sessionPool.PutBack(session)
 		}
+		sessionPool.PutBack(session)
 	}
 }
 
